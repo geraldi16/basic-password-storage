@@ -4,21 +4,14 @@ import path from 'path'
 
 const basename = path.basename(__filename)
 const env = process.env.NODE_ENV || 'development'
-const config = require('../database')
+const config = require('../database')[env]
 const db = {}
 
 const sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
+    config.url,
     {
         logging: false,
-        host: config.host,
-        dialect: 'mysql',
-        pool: {
-            max: process.env.NODE_ENV === 'development' ? 2 : 128,
-            min: process.env.NODE_ENV === 'development' ? 1 : 16
-        },
+        dialect: 'postgres',
         benchmark: true
     }
 )

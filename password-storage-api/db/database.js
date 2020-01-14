@@ -1,9 +1,12 @@
 require('../env')
 
 module.exports = {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    dialect: 'postgre',
+    development: {
+        url: process.env.DEV_DATABASE_URL,
+        dialect: 'postgres',
+    },
+    test: {
+        url: process.env.TEST_DATABASE_URL,
+        dialect: 'postgres',
+    },
 }
