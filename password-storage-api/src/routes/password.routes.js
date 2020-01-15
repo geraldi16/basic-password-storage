@@ -1,8 +1,11 @@
 import { Router } from 'express'
 
 import * as passwordController from '../controller/password.controller'
+import authMiddleware from '../middleware/auth.middleware'
 
 const router = Router()
+
+router.use(authMiddleware)
 
 router.get('/list', passwordController.getUserPasswords)
 router.post('/detail', passwordController.getDetailUserPassword)

@@ -15,7 +15,21 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   user.associate = function(models) {
-    // associations can be defined here
+    user.hasMany(models.PasswordData, {
+      foreignKey: 'userId'
+    })
   };
+
+  /**
+   * Get user account list.
+   */
+  user.prototype.getAccountList = async function() {
+    const passwordData = await this.getPasswordData()
+
+    // filter so that list only contains accountName
+    const accountList = passwordData.map(datum => datum.accountName)
+
+    return accountList
+  }
   return user;
 };

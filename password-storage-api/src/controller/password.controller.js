@@ -1,4 +1,4 @@
-import { PasswordData } from '../../db/models'
+import { PasswordData, User } from '../../db/models'
 
 /**
  * Get user password list.
@@ -6,11 +6,19 @@ import { PasswordData } from '../../db/models'
  * @param {object} res - express response object
  */
 export async function getUserPasswords(req, res) {
-    const passwordData = await PasswordData.findAll()
+    const userId = req.decoded.userId
     try {
+        // fetch user data
+        const user = await User.findByPk(userId)
+        if (!user){
+            throw new Error('User not found.')
+        }
+
+        const accountList = await user.getAccountList()
+
         res.send({
             error: false,
-            data: passwordData
+            data: accountList
         })
     } catch (error) {
         res.status(400).send({
@@ -26,10 +34,13 @@ export async function getUserPasswords(req, res) {
  * @param {object} res - express response object
  */
 export async function getDetailUserPassword(req, res) {
+    const { account: accountName } = req.body
+    const userId = req.decoded.userId
     try {
+        const passwordData = await PasswordData.getDetailPasswordData(accountName, userId)
         res.send({
             error: false,
-            data: 'hello world'
+            data: passwordData
         })
     } catch (error) {
         res.status(400).send({
@@ -45,10 +56,23 @@ export async function getDetailUserPassword(req, res) {
  * @param {object} res - express response object
  */
 export async function addNewPassword(req, res) {
+    const { account: accountName, username, password } = req.body
+    const userId = req.decoded.userId
     try {
+        const passwordData = await PasswordData.create({
+            userId,
+            accountName,
+            username,
+            password
+        })
+
+        if (!passwordData){
+            throw new Error('Something\'s wrong while adding new password data.')
+        }
+
         res.send({
             error: false,
-            data: 'hello world'
+            data: 'Add new password success!'
         })
     } catch (error) {
         res.status(400).send({
@@ -64,10 +88,26 @@ export async function addNewPassword(req, res) {
  * @param {object} res - express response object
  */
 export async function editPasswordData(req, res) {
+    const { account: accountName, new_account: newAccountName, username, password } = req.body
+    const userId = req.decoded.userId
     try {
+        const passwordData = await PasswordData.findOne({
+            where: {accountName, userId}
+        })
+        if (!passwordData){
+            throw new Error('Password data not found.')
+        }
+
+        // update value
+        passwordData.update({
+            accountName: newAccountName,
+            username,
+            password
+        })
+
         res.send({
             error: false,
-            data: 'hello world'
+            data: 'Data successfully updated.'
         })
     } catch (error) {
         res.status(400).send({
@@ -83,10 +123,22 @@ export async function editPasswordData(req, res) {
  * @param {object} res - express response object
  */
 export async function deletePasswordData(req, res) {
+    const { account: accountName, new_account: newAccountName, username, password } = req.body
+    const userId = req.decoded.userId
     try {
+        const passwordData = await PasswordData.findOne({
+            where: {accountName, userId}
+        })
+        if (!passwordData){
+            throw new Error('Password data not found.')
+        }
+
+        // delete value
+        passwordData.destroy()
+
         res.send({
             error: false,
-            data: 'hello world'
+            data: 'Data successfully deleted.'
         })
     } catch (error) {
         res.status(400).send({

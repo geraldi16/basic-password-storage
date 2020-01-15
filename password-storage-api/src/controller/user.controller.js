@@ -1,5 +1,6 @@
 import { User } from '../../db/models'
 import { createAccessToken } from '../utils/tokenHelper'
+import { encodeUserId } from '../utils/userHelper'
 import { isPasswordMatch } from '../utils/passwordHelper'
 
 /**
@@ -22,7 +23,10 @@ export async function register(req, res) {
         if (!user){
             throw new Error('User failed to registered!')
         }
-        const token = await createAccessToken({username: user.name})
+        const token = await createAccessToken({
+            username: user.name,
+            userId: encodeUserId(user.id)
+        })
 
         res.send({
             error: false,
@@ -57,7 +61,10 @@ export async function login(req, res) {
         }
 
         // create access token
-        const token = await createAccessToken({username: user.name})
+        const token = await createAccessToken({
+            username: user.name,
+            userId: encodeUserId(user.id)
+        })
         res.send({
             error: false,
             data: token
