@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const filename = `.env.${process.env.NODE_ENV || 'development'}`
+const filename = `.env.development`
 
 if (fs.existsSync(filename)){
     require('dotenv-expand')(

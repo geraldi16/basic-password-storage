@@ -7,6 +7,7 @@ import { PasswordData, User } from '../../db/models'
  */
 export async function getUserPasswords(req, res) {
     const userId = req.decoded.userId
+    
     try {
         // fetch user data
         const user = await User.findByPk(userId)
@@ -95,7 +96,7 @@ export async function editPasswordData(req, res) {
             where: {accountName, userId}
         })
         if (!passwordData){
-            throw new Error('Password data not found.')
+            throw new Error('Data not found.')
         }
 
         // update value
@@ -123,14 +124,14 @@ export async function editPasswordData(req, res) {
  * @param {object} res - express response object
  */
 export async function deletePasswordData(req, res) {
-    const { account: accountName, new_account: newAccountName, username, password } = req.body
+    const { account: accountName } = req.body
     const userId = req.decoded.userId
     try {
         const passwordData = await PasswordData.findOne({
             where: {accountName, userId}
         })
         if (!passwordData){
-            throw new Error('Password data not found.')
+            throw new Error('Data not found.')
         }
 
         // delete value

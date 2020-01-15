@@ -1,14 +1,15 @@
 import jwt from 'jsonwebtoken'
 
-const tokenSecret = process.env.TOKEN_SECRET
+const tokenSecret = process.env.TOKEN_SECRET || 'testingsecret'
 
 /**
  * Create access token included basic user info and token period.
  * @param {object} payload - basic information to be encoded to jwt
+ * @param {string} expiresIn - define token lifetime
  */
-export const createAccessToken = async(payload) => {
+export const createAccessToken = async(payload, expiresIn='1d') => {
     const options = {
-        expiresIn: '1d'
+        expiresIn
     }
     const secret = tokenSecret
 
