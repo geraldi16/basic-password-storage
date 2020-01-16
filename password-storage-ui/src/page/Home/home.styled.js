@@ -49,6 +49,13 @@ export const SubmitButton = styled.button`
     color: white;
     background: #d17ff9;
     font-size: 14px;
+    &:hover {
+        background: #7f22ad;
+        cursor: pointer;
+    }
+    &:focus {
+        outline: none;
+    }
 `
 export const Border = styled.div`
     font-size: 12px;

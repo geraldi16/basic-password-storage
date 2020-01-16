@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 
 import * as Style from './home.styled'
 import { login } from '../../api-connector/auth'
@@ -32,6 +32,8 @@ class Login extends React.Component {
                     name: '',
                     password: ''
                 })
+                // update authenticated status
+                this.props.updateAuthenticated()
             })
             .catch(error => {
                 alert(error.message)
@@ -49,7 +51,6 @@ class Login extends React.Component {
 
     render() {
         const { name, password } = this.state
-        console.log(this.state)
         return (
             <Style.Wrapper onSubmit={this.processLogin}>
                 <Style.Title>Password Management App</Style.Title>
@@ -71,7 +72,7 @@ class Login extends React.Component {
                 <Style.SubmitArea>
                     <Style.SubmitButton>Login</Style.SubmitButton>
                     <Style.Border>Or,</Style.Border>
-                    <a href="/auth/register">Sign up</a>
+                    <NavLink to="/auth/register">Sign up now!</NavLink>
                 </Style.SubmitArea>
             </Style.Wrapper>
         )

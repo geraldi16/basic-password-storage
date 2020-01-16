@@ -41,6 +41,8 @@ class Register extends React.PureComponent {
                         confirmPassword: '',
                         error: ''
                     })
+                    // update authenticated status
+                    this.props.updateAuthenticated()
                 })
                 .catch(error => {
                     alert(error.message)

@@ -7,9 +7,9 @@ class Home extends React.PureComponent {
     render() {
         const {authType} = this.props.match.params
         if (authType === 'register') {
-            return <Register />
+            return <Register {...this.props}/>
         }
-        return <Login />
+        return <Login {...this.props}/>
     }
 }
 
