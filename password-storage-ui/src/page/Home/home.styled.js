@@ -1,11 +1,19 @@
 import styled from 'styled-components'
 
+import { media } from '../../utils/dimension'
+
 export const Wrapper = styled.form`
-    border: 1px solid #c3c3c3;
-    border-radius: 8px;
-    position: fixed;
-    top: 20%;
-    left: 30%;
+    ${media.desktop`
+        position: fixed;
+        top: 20%;
+        left: 25%;
+        border: 1px solid #c3c3c3;
+        border-radius: 8px;
+    `}
+    ${media.laptopXL`
+        top: 20%;
+        left: 30%;
+    `}
     padding: 30px 50px;
 `
 export const Title = styled.h1`
