@@ -1,7 +1,7 @@
 # Password-storage-api
 Password management application API side. This documentation will describe basic usage, running testing, and api documentation.
 ### Content
-1. [Basic Usage](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#basic-usage)\
+1. [Basic Usage](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#basic-usage)
  2. [Running Test](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#running-testing)
 3. [API Documentation](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#api-documentation)
     - [Register](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#register)
