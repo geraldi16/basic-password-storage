@@ -1,4 +1,5 @@
 import * as passwordHelper from '../../src/utils/passwordHelper'
+
 module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define('User', {
     name:{

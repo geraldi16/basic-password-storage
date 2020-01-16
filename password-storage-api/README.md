@@ -1,24 +1,34 @@
 # Password-storage-api
 Password management application API side. This documentation will describe basic usage, running testing, and api documentation.
-
+### Content
+    1. [Basic Usage](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#basic-usage)\
+    2. [Running Test](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#running-testing)
+    3. [API Documentation](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#api-documentation)
+        - [Register](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#register)
+        - [Login](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#login)
+        - [Get List Account](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#get-list-account)
+        - [Get Detail Password](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#get-detail-password-data)
+        - [Add new Password Data](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#add-new-password-data)
+        - [Edit Password Data](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#edit-password-data)
+        - [Delete Password Data](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#delete-password-data)
 ## Basic Usage
 After cloning from github repository, go to api directory.
 ```
-cd password-storage-api/
+$ cd password-storage-api/
 ```
 In this directory, you need to setup several steps after this.
 
 ### Install modules
 First, you need to install the modules. Type this
 ```
-yarn install
+$ yarn install
 ```
 
 ### Database setup
 Second, you need to set up the database. Create database in your postgres:
 ```
-createdb password_storage
-createdb password_storage_test
+$ createdb password_storage
+$ createdb password_storage_test
 ```
 Note that `password_storage` is for development mode and `password_storage_test` is for testing mode
 
@@ -26,6 +36,10 @@ After that, migrate database config with `sequelize-cli` into both of your datab
 ```
 $ npx sequelize-cli db:migrate
 $ NODE_ENV=test npx sequelize-cli db:migrate
+```
+You can also fill your database with the seeder we provided. This is optional, but if you wish to, do this.
+```
+$ npx sequelize-cli db:seed:all
 ```
 
 ### Copy environment variables
@@ -56,7 +70,7 @@ yarn test
 ## API Documentation
 ### Login and Register
 #### Register
-Route: `POST /auth/register`
+Route: `POST /auth/register` \
 Input
 ```
 {
@@ -73,7 +87,7 @@ Output
 }
 ```
 #### Login
-Route: `POST /auth/login`
+Route: `POST /auth/login`\
 Input
 ```
 {
@@ -90,7 +104,7 @@ Output
 ```
 ### Password Management
 #### Get List Account
-Route: `GET /password/list`
+Route: `GET /password/list`\
 Input: `<none>`
 Output: 
 ```
@@ -100,7 +114,7 @@ Output:
 }
 ```
 #### Get Detail Password Data
-Route: `POST /password/detail`
+Route: `POST /password/detail`\
 Input
 ```
 {
@@ -119,13 +133,13 @@ Output
 }
 ```
 #### Add New Password Data
-Route: `POST /password/add`
+Route: `POST /password/add`\
 Input
 ```
 {
 	"account": <string>,
     "username": <string>,
-	"password": <string>,
+    "password": <string>,
 }
 ```
 Output
@@ -136,7 +150,7 @@ Output
 }
 ```
 #### Edit Password Data
-Route: `PATCH /password/edit`
+Route: `PATCH /password/edit`\
 Input
 ```
 {
@@ -154,7 +168,7 @@ Output
 }
 ```
 #### Delete Password Data
-Route: `DELETE /password/delete`
+Route: `DELETE /password/delete`\
 Input
 ```
 {
