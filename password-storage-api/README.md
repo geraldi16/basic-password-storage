@@ -54,3 +54,117 @@ yarn test
 ```
 
 ## API Documentation
+### Login and Register
+#### Register
+Route: `POST /auth/register`
+Input
+```
+{
+	"name": <string>,
+	"password": <string>,
+	"confirm_password": <string>
+}
+```
+Output
+```
+{
+    "error": false,
+    "data": <token string>
+}
+```
+#### Login
+Route: `POST /auth/login`
+Input
+```
+{
+	"name": <string>,
+	"password": <string>,
+}
+```
+Output
+```
+{
+    "error": false,
+    "data": <token string>
+}
+```
+### Password Management
+#### Get List Account
+Route: `GET /password/list`
+Input: `<none>`
+Output: 
+```
+{
+    error: false,
+    data: [accountName1, accountName2, ... , accountNameN]
+}
+```
+#### Get Detail Password Data
+Route: `POST /password/detail`
+Input
+```
+{
+	"account": <string>,
+}
+```
+Output
+```
+{
+    "error": false,
+    "data": {
+        "accountName": <string>,
+        "username": <string>,
+        "password": <string>
+    }
+}
+```
+#### Add New Password Data
+Route: `POST /password/add`
+Input
+```
+{
+	"account": <string>,
+    "username": <string>,
+	"password": <string>,
+}
+```
+Output
+```
+{
+    "error": false,
+    "data": 'Add new password success!'
+}
+```
+#### Edit Password Data
+Route: `PATCH /password/edit`
+Input
+```
+{
+	"account": <string>,
+    "new_account": <string | optional>,
+    "username": <string | optional>,
+	"password": <string | optional>,
+}
+```
+Output
+```
+{
+    "error": false,
+    "data":'Data successfully updated.'
+}
+```
+#### Delete Password Data
+Route: `DELETE /password/delete`
+Input
+```
+{
+	"account": <string>,
+}
+```
+Output
+```
+{
+    "error": false,
+    "data": 'Data successfully deleted.'
+}
+```
