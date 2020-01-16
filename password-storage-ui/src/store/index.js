@@ -1,4 +1,4 @@
-import createBrowserHistory from "history/createBrowserHistory"
+import { createBrowserHistory } from "history"
 import { applyMiddleware, compose, createStore } from "redux"
 import { connectRouter, routerMiddleware } from "connected-react-router/immutable"
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly"

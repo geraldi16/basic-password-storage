@@ -30,11 +30,11 @@ class Axios {
 		return this[singleton]
 	}
 
-	get = (...params) => this.session.get(...params)
-	post = (...params) => this.session.post(...params)
-	put = (...params) => this.session.put(...params)
-	delete = (...params) => this.session.delete(...params)
-	patch = (...params) => this.session.patch(...params)
+	get = (...params) => this.session.get(...params).then(axiosMiddleware, axiosErrorHandler)
+	post = (...params) => this.session.post(...params).then(axiosMiddleware, axiosErrorHandler)
+	put = (...params) => this.session.put(...params).then(axiosMiddleware, axiosErrorHandler)
+	delete = (...params) => this.session.delete(...params).then(axiosMiddleware, axiosErrorHandler)
+	patch = (...params) => this.session.patch(...params).then(axiosMiddleware, axiosErrorHandler)
 }
 
 /**
