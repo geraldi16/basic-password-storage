@@ -1,5 +1,6 @@
 import { decodeUserId } from "../utils/userHelper"
 import { verifyAccessToken } from "../utils/tokenHelper"
+import { logger } from "../utils/logger"
 
 /**
  * Middleware to check token when accessing private route.
@@ -12,11 +13,13 @@ export default async function authMiddleware(req, res, next) {
         // get token from header
         const header = req.headers.authorization
         if (!header){
+            logger('warn',`Attempting without header - user IP: ${req.ip}`)
             throw new Error('Header is missing.')
         }
         // check if token in correct format: `Bearer <your_token>`
         const breakdownToken = header.split(' ')
         if (breakdownToken.length !== 2) {
+            logger('warn',`Attempting with malform token format - user IP: ${req.ip} | token: ${header}`)
             throw new Error('Invalid bearer token format.')
         }
         const token = breakdownToken[1]
@@ -28,7 +31,6 @@ export default async function authMiddleware(req, res, next) {
         req.decoded.userId = decodeUserId(decoded.userId)
         next()
     } catch (error) {
-        console.error(error)
         res.status(400).send({
             error: true,
             message: error.message

@@ -1,4 +1,5 @@
 import * as passwordHelper from '../../src/utils/passwordHelper'
+import { logger } from '../../src/utils/logger';
 
 module.exports = (sequelize, DataTypes) => {
   const passwordData = sequelize.define('PasswordData', {
@@ -36,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       where: {accountName, userId}
     })
     if (!data){
+      logger('warn',`Detail password - Password data not found - userId: ${userId} | account: ${accountName}`)
       throw new Error('Data not found.')
     }
 
