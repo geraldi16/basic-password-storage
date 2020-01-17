@@ -1,7 +1,9 @@
+import errorHandler from '../utils/errorHandler'
 import { User } from '../../db/models'
 import { createAccessToken } from '../utils/tokenHelper'
 import { encodeUserId } from '../utils/userHelper'
 import { isPasswordMatch } from '../utils/passwordHelper'
+import { logger } from '../utils/logger'
 
 /**
  * Register new user.
@@ -12,7 +14,7 @@ export async function register(req, res) {
     const { name, password, confirm_password: confirmPassword } = req.body
     try {
         if (password !== confirmPassword){
-            throw new Error('Confirm password is not same with password!')
+            throw new Error('Confirm password is not same with password![step failed]')
         }
 
         // register user and create token for authentication
@@ -21,22 +23,22 @@ export async function register(req, res) {
             password
         })
         if (!user){
-            throw new Error('User failed to registered!')
+            throw new Error('User failed to registered![step failed]')
         }
         const token = await createAccessToken({
             username: user.name,
             userId: encodeUserId(user.id)
         })
 
+        // write log
+        logger('info',`New user successfully registered - user id: ${user.id}`)
+
         res.send({
             error: false,
             data: token
         })
     } catch (error) {
-        res.status(400).send({
-            error: true,
-            message: error.message
-        })
+        errorHandler(error, res)
     }
 }
 
@@ -48,16 +50,21 @@ export async function register(req, res) {
 export async function login(req, res) {
     const { name, password } = req.body
     try {
+        // initial info
+        logger('info',`Attempting login - user name: ${name}`)
+
         // check user exist
         const user = await User.findOne({where: {name}})
         if (!user){
-            throw new Error('Invalid user name/password!')
+            logger('warn',`Login failed due to name cannot found - user name: ${name}`)
+            throw new Error('Invalid user name/password![step failed]')
         }
 
         // compare password
         const passwordMatch = await isPasswordMatch(password, user.password)
         if (!passwordMatch){
-            throw new Error('Invalid user name/password!')
+            logger('warn',`Login failed due to wrong password- user name: ${name}`)
+            throw new Error('Invalid user name/password![step failed]')
         }
 
         // create access token
@@ -70,9 +77,6 @@ export async function login(req, res) {
             data: token
         })
     } catch (error) {
-        res.status(400).send({
-            error: true,
-            message: error.message
-        })
+        errorHandler(error, res)
     }
 }

@@ -1,4 +1,6 @@
+import errorHandler from '../utils/errorHandler'
 import { PasswordData, User } from '../../db/models'
+import { logger } from '../utils/logger'
 
 /**
  * Get user password list.
@@ -12,7 +14,8 @@ export async function getUserPasswords(req, res) {
         // fetch user data
         const user = await User.findByPk(userId)
         if (!user){
-            throw new Error('User not found.')
+            logger('warn', `User not found - user id: ${userId}`)
+            throw new Error('User not found.[step failed]')
         }
 
         const accountList = await user.getAccountList()
@@ -22,10 +25,7 @@ export async function getUserPasswords(req, res) {
             data: accountList
         })
     } catch (error) {
-        res.status(400).send({
-            error: true,
-            message: error.message
-        })
+        errorHandler(error, res)
     }
 }
 
@@ -44,10 +44,7 @@ export async function getDetailUserPassword(req, res) {
             data: passwordData
         })
     } catch (error) {
-        res.status(400).send({
-            error: true,
-            message: error.message
-        })
+        errorHandler(error, res)
     }
 }
 
@@ -68,18 +65,18 @@ export async function addNewPassword(req, res) {
         })
 
         if (!passwordData){
+            logger('warn', `User cannot add password data - user id: ${userId}`)
             throw new Error('Something\'s wrong while adding new password data.')
         }
 
         res.send({
             error: false,
-            data: 'Add new password success!'
+            data: {
+                accountName: passwordData.accountName
+            }
         })
     } catch (error) {
-        res.status(400).send({
-            error: true,
-            message: error.message
-        })
+        errorHandler(error, res)
     }
 }
 
@@ -96,7 +93,8 @@ export async function editPasswordData(req, res) {
             where: {accountName, userId}
         })
         if (!passwordData){
-            throw new Error('Data not found.')
+            logger('warn', `Edit password - password data not found - user id: ${userId} | account: ${accountName}`)
+            throw new Error('Data not found.[step failed]')
         }
 
         // update value
@@ -111,10 +109,7 @@ export async function editPasswordData(req, res) {
             data: 'Data successfully updated.'
         })
     } catch (error) {
-        res.status(400).send({
-            error: true,
-            message: error.message
-        })
+        errorHandler(error, res)
     }
 }
 
@@ -131,7 +126,8 @@ export async function deletePasswordData(req, res) {
             where: {accountName, userId}
         })
         if (!passwordData){
-            throw new Error('Data not found.')
+            logger('warn', `Delete password - User not found - user id: ${userId}`)
+            throw new Error('Data not found.[step failed]')
         }
 
         // delete value
@@ -142,9 +138,6 @@ export async function deletePasswordData(req, res) {
             data: 'Data successfully deleted.'
         })
     } catch (error) {
-        res.status(400).send({
-            error: true,
-            message: error.message
-        })
+        errorHandler(error, res)
     }
 }
