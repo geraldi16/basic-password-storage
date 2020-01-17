@@ -1,14 +1,22 @@
 import React from 'react'
-
 import styled from 'styled-components'
 
+import { media } from '../../utils/dimension'
+
 export const Wrapper = styled.div`
-    padding-top: 15vh;
+    padding-top: 100px;
 `
 export const Table = styled.table`
-    width: 400px;
     text-align: center;
-    margin-left: 40vw;
+    width: 100%
+    ${media.desktop`
+        width: 400px;
+        margin-left: 30vw;
+    `}
+    ${media.laptop`
+        width: 400px;
+        margin-left: 40vw;
+    `}
 `
 export const TableHeader = styled.tr`
     background: #c3c3c3;
@@ -25,16 +33,30 @@ export const TableContentAccount = styled.td`
 `
 
 // modal section
-export const ModalWrapper = styled.form`
+export const ModalWrapper = styled.div`
     position: fixed;
-    top: 20%;
-    left: 35%;
+    top: ${props => props.isEditModal ? '2%' : '20%' };
+    left: 2%;
+    padding: 10px;
+    width: 90vw;
     border: 1px solid #c3c3c3;
     border-radius: 8px;
     z-index: 30;
     background: #fff;
-    padding: 10px 50px;
-    width: 400px;
+    ${media.desktop`
+        position: fixed;
+        top: 10%;
+        left: 27%;
+        width: 400px;
+        padding: 10px 50px;
+    `}
+    ${media.laptop`
+        position: fixed;
+        top: 20%;
+        left: 35%;
+        width: 400px;
+        padding: 10px 50px;
+    `}
 `
 export const Background = styled.div`
     z-index: 15;
@@ -45,25 +67,40 @@ export const Background = styled.div`
     height: 100%;
     background: #00000040;
 `
-export const Title = styled.h3`
-    margin-bottom: 30px;
+export const Title = styled.p`
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    ${media.tablet`
+        margin-bottom: 30px;
+        font-size: 1.17em;
+    `}
 `
 export const InputTitle = styled.p`
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
+    margin: 10px 0;
+    ${media.tablet`
+        margin-bottom: 30px;
+        font-size: 14px;
+    `}
 `
 export const Input = styled.input`
-    width: 100%;
+    width: 90%;
     height: 30px;
     padding-left: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: 1px solid #c3c3c3;
     border-radius: 5px;
-    font-size: 14px;
-
+    font-size: 12px;
     &:focus {
         outline: none;
     }
+    ${media.desktop`
+        margin-bottom: 20px;
+        font-size: 14px;
+        width: 100%;
+    `}
 `
 export const ErrorText = styled.p`
     color: red;
@@ -81,7 +118,7 @@ export const SubmitButton = styled.button`
     border: 1px solid #a94ad8;
     color: white;
     background: #d17ff9;
-    font-size: 14px;
+    font-size: 12px;
     &:hover {
         background: #7f22ad;
         cursor: pointer;
@@ -89,6 +126,9 @@ export const SubmitButton = styled.button`
     &:focus {
         outline: none;
     }
+    ${media.tablet`
+        font-size: 14px;
+    `}
 `
 
 export const WhiteButton = styled.button`

@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { media } from '../../utils/dimension'
+
 export const Wrapper = styled.div`
     height: 75px;
     width: 100%;
@@ -27,15 +29,30 @@ export const Button = styled.button`
 `
 
 // modal section
-export const ModalWrapper = styled.form`
+export const ModalWrapper = styled.div`
     position: fixed;
-    top: 20%;
-    left: 35%;
+    top: 12%;
+    left: 2%;
+    padding: 10px;
+    width: 90vw;
     border: 1px solid #c3c3c3;
     border-radius: 8px;
     z-index: 30;
     background: #fff;
-    padding: 10px 50px;
+    ${media.desktop`
+        position: fixed;
+        top: 10%;
+        left: 27%;
+        width: 400px;
+        padding: 10px 50px;
+    `}
+    ${media.laptop`
+        position: fixed;
+        top: 20%;
+        left: 35%;
+        width: 400px;
+        padding: 10px 50px;
+    `}
 `
 export const Background = styled.div`
     z-index: 15;
@@ -46,21 +63,31 @@ export const Background = styled.div`
     height: 100%;
     background: #00000040;
 `
-export const Title = styled.h3`
+export const Title = styled.p`
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
     margin-bottom: 30px;
+    ${media.tablet`
+        font-size: 1.17em;
+    `}
 `
 export const Input = styled.input`
-    width: 100%;
+    width: 90%;
     height: 30px;
     padding-left: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: 1px solid #c3c3c3;
     border-radius: 5px;
-    font-size: 14px;
-
+    font-size: 12px;
+    margin-bottom: 20px;
     &:focus {
         outline: none;
     }
+    ${media.desktop`
+        font-size: 14px;
+        width: 100%;
+    `}
 `
 export const ErrorText = styled.p`
     color: red;
