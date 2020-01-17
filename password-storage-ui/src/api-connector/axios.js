@@ -1,5 +1,7 @@
 import axios from "axios"
 
+import { getToken } from "../utils/tokenHelper"
+
 const singleton = Symbol()
 const singletonEnforcer = Symbol()
 
@@ -17,10 +19,19 @@ class Axios {
 			timeout: 30000,
 			baseURL: `http://${window.location.hostname}:1616`
 		})
-		this._interceptor = null
+		
+		this.session.interceptors.request.use(config => {
+			if (getToken()){
+				Object.assign(config, {
+					headers: {
+						Authorization: `Bearer ${getToken()}`,
+						...config["headers"],
+					},
+				})
+			}
+			return config
+		})
 		this.token = ""
-
-		// this._proxyRequest()
 	}
 
 	static get instance() {

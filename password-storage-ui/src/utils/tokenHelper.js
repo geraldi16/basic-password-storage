@@ -13,8 +13,15 @@ export const isAuthenticated = () => {
 }
 
 /**
- * Remove token from local storage
+ * Remove token from local storage.
  */
 export const clearToken = () => {
     window.localStorage.removeItem("token")
+}
+
+/**
+ * Get token from local storage.
+ */
+export const getToken = () => {
+    return window.localStorage.getItem("token")
 }

@@ -187,14 +187,9 @@ describe('password-controller', () => {
     })
 
     it('delete data should return error because account name not found', async() => {
-        const payload = {
-            account: 'account999'
-        }
-
         const res = await req
-            .delete('/password/delete')
+            .delete('/password/delete/account999')
             .set(header)
-            .send(payload)
 
         // check status
         expect(res.status).toBe(400)
@@ -207,14 +202,9 @@ describe('password-controller', () => {
     })
 
     it('successfully delete password data', async() => {
-        const payload = {
-            account: 'account1'
-        }
-
         const res = await req
-            .delete('/password/delete')
+            .delete('/password/delete/account1')
             .set(header)
-            .send(payload)
 
         // check status
         expect(res.status).toBe(200)
