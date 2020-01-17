@@ -139,7 +139,9 @@ describe('password-controller', () => {
         // check response
         expect(res.body).toEqual({
             error: false,
-            data: 'Add new password success!'
+            data: {
+                accountName: 'account3'
+            }
         })
     })
 

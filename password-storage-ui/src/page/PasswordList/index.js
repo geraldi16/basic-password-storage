@@ -69,7 +69,18 @@ class PasswordList extends React.Component {
         }
         
         passwordData.editPasswordData(payload)
-            .then(result => {
+            .then(_ => {
+                // update accountList
+                if (detailData.newAccountName) {
+                    const accountList = this.state.accountList.map(acct => {
+                        if (acct === account)
+                            return detailData.newAccountName
+                        return acct
+                    })
+                    this.setState({accountList})
+                }
+
+                // close modal
                 this.setState({
                     showEdit: false
                 })
@@ -93,6 +104,18 @@ class PasswordList extends React.Component {
 
                 this.setState({accountList, showDelete: false})
             })
+    }
+
+    /**
+     * Add added data into account list.
+     * 
+     * @param {string} account - newly added account name
+     */
+    addData = (account) => {
+        const { accountList } = this.state
+        accountList.push(account)
+
+        this.setState({accountList})
     }
 
     /**
@@ -120,7 +143,7 @@ class PasswordList extends React.Component {
         return (
             <React.Fragment>
 <               Style.Background onClick={() => this.toggleModal('showEdit')}/>
-                <Style.ModalWrapper onSubmit={this.editData(detailData.accountName)}>
+                <Style.ModalWrapper isEditModal={true} onSubmit={this.editData(detailData.accountName)}>
                     <Style.Title>Edit Data</Style.Title>
                     <Style.InputTitle>Account Name:</Style.InputTitle>
                     <Style.Input
@@ -176,7 +199,7 @@ class PasswordList extends React.Component {
     render() {
         return (
             <Style.Wrapper>
-                <Header {...this.props} />
+                <Header addData={this.addData} {...this.props} />
                 <Style.Table>
                     <thead>
                         <Style.TableHeader>

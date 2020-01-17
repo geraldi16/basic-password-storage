@@ -54,7 +54,10 @@ class Header extends React.Component {
         }
 
         addNewPasswordData(payload)
-            .then(() => {
+            .then(result => {
+                // Add data to the list from parent function
+                this.props.addData(result.accountName)
+
                 // close modal
                 this.setState({
                     showAddModal: false,
