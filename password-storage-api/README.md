@@ -11,6 +11,7 @@ Password management application API side. This documentation will describe basic
     - [Add new Password Data](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#add-new-password-data)
     - [Edit Password Data](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#edit-password-data)
     - [Delete Password Data](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#delete-password-data)
+4. [Other Features](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#other-features)
 ## Basic Usage
 After cloning from github repository, go to api directory.
 ```
@@ -182,3 +183,7 @@ Output
     "data": 'Data successfully deleted.'
 }
 ```
+
+## Other Features
+### System Logging
+Every error occured will be logged and can be found in directory `/log`.
