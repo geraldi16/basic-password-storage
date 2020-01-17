@@ -124,7 +124,7 @@ export async function editPasswordData(req, res) {
  * @param {object} res - express response object
  */
 export async function deletePasswordData(req, res) {
-    const { account: accountName } = req.body
+    const { account: accountName } = req.params
     const userId = req.decoded.userId
     try {
         const passwordData = await PasswordData.findOne({

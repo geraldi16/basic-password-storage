@@ -1,16 +1,16 @@
 # Password-storage-api
 Password management application API side. This documentation will describe basic usage, running testing, and api documentation.
 ### Content
-1. [Basic Usage](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#basic-usage)
- 2. [Running Test](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#running-testing)
-3. [API Documentation](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#api-documentation)
-    - [Register](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#register)
-    - [Login](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#login)
-    - [Get List Account](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#get-list-account)
-    - [Get Detail Password](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#get-detail-password-data)
-    - [Add new Password Data](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#add-new-password-data)
-    - [Edit Password Data](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#edit-password-data)
-    - [Delete Password Data](https://github.com/geraldi16/basic-password-storage/tree/release/1.0.0/password-storage-api#delete-password-data)
+1. [Basic Usage](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#basic-usage)
+ 2. [Running Test](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#running-testing)
+3. [API Documentation](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#api-documentation)
+    - [Register](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#register)
+    - [Login](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#login)
+    - [Get List Account](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#get-list-account)
+    - [Get Detail Password](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#get-detail-password-data)
+    - [Add new Password Data](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#add-new-password-data)
+    - [Edit Password Data](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#edit-password-data)
+    - [Delete Password Data](https://github.com/geraldi16/basic-password-storage/tree/master/password-storage-api#delete-password-data)
 ## Basic Usage
 After cloning from github repository, go to api directory.
 ```
