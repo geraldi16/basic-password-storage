@@ -22,17 +22,19 @@ You will also see any lint errors in the console.
 
 
 ## App Features
+Here's what includes in the app:
 
 ### Auth Page
-#### Login
-Log in to application.
-
-#### Register
-Create new user for app.
+1. Login
+2. Logout
+3. Register new user
 
 ### Password Management Page
-#### See user's account list
-#### See user detail account's username and password
-#### Adding new account credential info
-#### Edit existing account credential info
-#### Delete existing account credential info
+1. See user's account list
+2. See user detail account's username and password
+3. Adding new account credential info
+4. Edit existing account credential info
+5. Delete existing account credential info
+
+### Responsive Layout
+Compatible for mobile, tablet, and desktop views.
